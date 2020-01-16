@@ -37,8 +37,8 @@ module.exports = {
         }
       },
       '/apis': {
-        // target: 'http://47.105.75.254:8080', // 测试服务器
-        target: 'http://192.168.1.156:8080', // 彪哥
+        target: 'http://47.105.75.254:8080', // 测试服务器
+        // target: 'http://192.168.1.156:8080', // 彪哥
         changeOrigin: true,
         pathRewrite: {
           '^/apis': '/' // 通过pathRewrite重写地址，将前缀/front转为/
