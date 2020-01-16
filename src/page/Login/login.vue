@@ -2,15 +2,25 @@
 <template>
   <div class="login v2">
     <div class="wrapper">
-      <div class="dialog dialog-shadow" style="display: block; margin-top: -362px;">
+      <div
+        class="dialog dialog-shadow"
+        style="display: block; margin-top: -362px;"
+      >
         <div class="title">
           <h4>使用 三济生物 账号 登录官网</h4>
         </div>
-        <div v-if="loginPage" class="content">
+        <div
+          v-if="loginPage"
+          class="content"
+        >
           <ul class="common-form">
             <li class="username border-1p">
               <div class="input">
-                <input type="text" v-model="ruleForm.userName" placeholder="账号" />
+                <input
+                  type="text"
+                  v-model="ruleForm.userName"
+                  placeholder="账号"
+                />
               </div>
             </li>
             <li>
@@ -33,14 +43,34 @@
                   class="input-val"
                   @keyup.enter="login"
                 />
-                <canvas id="canvas" @click="draw"></canvas>
+                <canvas
+                  id="canvas"
+                  @click="draw"
+                ></canvas>
               </div>
             </li>
-            <li style="text-align: right" class="pr">
-              <el-checkbox class="auto-login" v-model="autoLogin">记住密码</el-checkbox>
-              <a class="register" @click="home">首页</a>
-              <a href="javascript:;" class="register" @click="toRegister">注册 三济生物 账号</a>
-              <a href="javascript:;" class="register" @click="toForgotpwd">忘记密码 ?</a>
+            <li
+              style="text-align: right"
+              class="pr"
+            >
+              <el-checkbox
+                class="auto-login"
+                v-model="autoLogin"
+              >记住密码</el-checkbox>
+              <a
+                class="register"
+                @click="home"
+              >首页</a>
+              <a
+                href="javascript:;"
+                class="register"
+                @click="toRegister"
+              >注册 三济生物 账号</a>
+              <a
+                href="javascript:;"
+                class="register"
+                @click="toForgotpwd"
+              >忘记密码 ?</a>
             </li>
           </ul>
           <!--登陆 -->
@@ -72,11 +102,11 @@
   </div>
 </template>
 <script>
-import YFooter from "/common/footer";
-import YButton from "/components/YButton";
-import { userLogin } from "/api/index.js";
-import { setStore, getStore, removeStore } from "/utils/storage.js";
-import "element-ui";
+import YFooter from '/common/footer'
+import YButton from '/components/YButton'
+import { userLogin } from '/api/index.js'
+import { setStore, getStore, removeStore } from '/utils/storage.js'
+import 'element-ui'
 // import { isvalidUsername } from '@/utils/validate'
 // import SIdentify from '@/components/identify/identify.vue'
 export default {
@@ -84,19 +114,19 @@ export default {
     return {
       loginPage: true,
       ruleForm: {
-        userName: "zjg",
-        userPwd: "123456",
-        code: "",
+        userName: 'zjg',
+        userPwd: '123456',
+        code: '',
         num: [],
-        errMsg: ""
+        errMsg: ''
       },
       autoLogin: false,
-      logintxt: "登录"
-    };
+      logintxt: '登录'
+    }
   },
   computed: {
     count() {
-      return this.$store.state.login;
+      return this.$store.state.login
     }
   },
   methods: {
@@ -105,211 +135,211 @@ export default {
       this.$notify.info({
         title: t,
         message: m
-      });
+      })
     },
     messageSuccess() {
       this.$message({
-        message: "恭喜您，注册成功！赶紧登录体验吧",
-        type: "success"
-      });
+        message: '恭喜您，注册成功！赶紧登录体验吧',
+        type: 'success'
+      })
     },
     message(m) {
       this.$message.error({
         message: m,
-        type: "error"
-      });
+        type: 'error'
+      })
     },
     // 获取vuex中登陆的状态
     getRemembered() {
-      var judge = getStore("remember");
-      if (judge === "true") {
-        this.autoLogin = true;
-        this.ruleForm.userName = getStore("rusername");
-        this.ruleForm.userPwd = getStore("rpassword");
+      var judge = getStore('remember')
+      if (judge === 'true') {
+        this.autoLogin = true
+        this.ruleForm.userName = getStore('rusername')
+        this.ruleForm.userPwd = getStore('rpassword')
       }
     },
     // 使用vuex保存登录状态
     rememberPass() {
       if (this.autoLogin === true) {
-        setStore("remember", "true");
-        setStore("rusername", this.ruleForm.userName);
-        setStore("rpassword", this.ruleForm.userPwd);
+        setStore('remember', 'true')
+        setStore('rusername', this.ruleForm.userName)
+        setStore('rpassword', this.ruleForm.userPwd)
       } else {
-        setStore("remember", "false");
-        removeStore("rusername");
-        removeStore("rpassword");
+        setStore('remember', 'false')
+        removeStore('rusername')
+        removeStore('rpassword')
       }
     },
     // 跳转到注册页
     toRegister() {
       this.$router.push({
-        path: "/register"
-      });
+        path: '/register'
+      })
     },
     // 跳转到忘记密码页
     toForgotpwd() {
-      window.location.href = "/#/forgetpwd";
+      window.location.href = '/#/forgetpwd'
       // this.$router.push({
       //   path: '/pwd'
       // })
     },
     // 跳转到首页
     home() {
-      window.location.href = "/";
+      window.location.href = '/'
     },
     // 登录返回按钮
     login_back() {
-      this.$router.go(-1);
+      this.$router.go(-1)
     },
     // 登录
     // 从validateCode组件中获取用户输入的验证码和系统自动生成的验证码
     login() {
-      this.logintxt = "登录中...";
-      this.rememberPass();
-      this.ruleForm.code = $(".input-val")
+      this.logintxt = '登录中...'
+      this.rememberPass()
+      this.ruleForm.code = $('.input-val')
         .val()
-        .toLowerCase();
-      let numStr = this.ruleForm.num.join("");
+        .toLowerCase()
+      let numStr = this.ruleForm.num.join('')
       if (
         !this.ruleForm.userName ||
         !this.ruleForm.userPwd ||
         !this.ruleForm.code
       ) {
-        this.message("账号、密码或者验证码不能为空!");
-        this.logintxt = "登录";
-        this.draw();
-        return;
+        this.message('账号、密码或者验证码不能为空!')
+        this.logintxt = '登录'
+        this.draw()
+        return
       }
       if (this.ruleForm.code !== numStr) {
-        this.message("验证码输入错误!");
-        this.logintxt = "登录";
-        this.ruleForm.code = "";
-        this.draw();
-        return;
+        this.message('验证码输入错误!')
+        this.logintxt = '登录'
+        this.ruleForm.code = ''
+        this.draw()
+        return
       }
-      let data = new FormData();
-      data.append("username", this.ruleForm.userName);
-      data.append("password", this.ruleForm.userPwd);
+      let data = new FormData()
+      data.append('username', this.ruleForm.userName)
+      data.append('password', this.ruleForm.userPwd)
       userLogin(data)
         .then(res => {
-          // console.log(res)
-          // console.log(res.data)
-          // console.log(res.data.user)
-          // console.log(res.data.user.activeId)
+          console.log(res)
+          console.log(res.data)
+          console.log(res.data.user)
+          console.log(res.data.user.activeId)
           if (res.data !== null && res.data.user !== null) {
-            setStore("token", res.data.token);
-            setStore("userId", res.data.user.id);
-            setStore("activeId", res.data.user.activeId);
+            setStore('token', res.data.token)
+            setStore('userId', res.data.user.id)
+            setStore('activeId', res.data.user.activeId)
             this.$message({
               message: res.message,
-              type: "success"
-            });
-            this.logintxt = "登录";
+              type: 'success'
+            })
+            this.logintxt = '登录'
             return this.$router.push({
-              path: "/"
-            });
+              path: '/'
+            })
           } else {
-            this.logintxt = "登录";
-            return this.$message.error(res.message);
+            this.logintxt = '登录'
+            return this.$message.error(res.message)
           }
         })
         .catch(res => {
           // console.log(222222222)
           // eslint-disable-next-line no-debugger
           if (res.response === null) {
-            this.$message.error("用户不存在");
-            this.logintxt = "登录";
-            this.draw();
-            return;
+            this.$message.error('用户不存在')
+            this.logintxt = '登录'
+            this.draw()
+            return
           } else {
-            this.$message.error("用户或密码错误");
-            this.logintxt = "登录";
-            this.draw();
-            return;
+            this.$message.error('用户或密码错误')
+            this.logintxt = '登录'
+            this.draw()
+            return
           }
-        });
+        })
     },
 
     draw() {
       // eslint-disable-next-line camelcase
-      var canvasWidth = $("#canvas").width();
+      var canvasWidth = $('#canvas').width()
       // eslint-disable-next-line camelcase
-      var canvas_height = $("#canvas").height();
-      var canvas = document.getElementById("canvas"); // 获取到canvas的对象，演员
-      var context = canvas.getContext("2d"); // 获取到canvas画图的环境，演员表演的舞台
+      var canvas_height = $('#canvas').height()
+      var canvas = document.getElementById('canvas') // 获取到canvas的对象，演员
+      var context = canvas.getContext('2d') // 获取到canvas画图的环境，演员表演的舞台
       // eslint-disable-next-line camelcase
-      canvas.width = canvasWidth;
+      canvas.width = canvasWidth
       // eslint-disable-next-line camelcase
-      canvas.height = canvas_height;
+      canvas.height = canvas_height
       var sCode =
-        "a,b,c,d,e,f,g,h,i,j,k,m,n,p,q,r,s,t,u,v,w,x,y,z,A,B,C,E,F,G,H,J,K,L,M,N,P,Q,R,S,T,W,X,Y,Z,1,2,3,4,5,6,7,8,9,0";
-      var aCode = sCode.split(",");
-      var aLength = aCode.length; // 获取到数组的长度
+        'a,b,c,d,e,f,g,h,i,j,k,m,n,p,q,r,s,t,u,v,w,x,y,z,A,B,C,E,F,G,H,J,K,L,M,N,P,Q,R,S,T,W,X,Y,Z,1,2,3,4,5,6,7,8,9,0'
+      var aCode = sCode.split(',')
+      var aLength = aCode.length // 获取到数组的长度
       for (var i = 0; i < 4; i++) {
         // 这里的for循环可以控制验证码位数（如果想显示6位数，4改成6即可）
-        var j = Math.floor(Math.random() * aLength); // 获取到随机的索引值
+        var j = Math.floor(Math.random() * aLength) // 获取到随机的索引值
         // var deg = Math.random() * 30 * Math.PI / 180;//产生0~30之间的随机弧度
-        var deg = Math.random() - 0.5; // 产生一个随机弧度
-        var txt = aCode[j]; // 得到随机的一个内容
-        this.ruleForm.num[i] = txt.toLowerCase();
-        var x = 10 + i * 20; // 文字在canvas上的x坐标
-        var y = 20 + Math.random() * 8; // 文字在canvas上的y坐标
-        context.font = "bold 23px 微软雅黑";
-        context.translate(x, y);
-        context.rotate(deg);
-        context.fillStyle = this.randomColor();
-        context.fillText(txt, 0, 0);
-        context.rotate(-deg);
-        context.translate(-x, -y);
+        var deg = Math.random() - 0.5 // 产生一个随机弧度
+        var txt = aCode[j] // 得到随机的一个内容
+        this.ruleForm.num[i] = txt.toLowerCase()
+        var x = 10 + i * 20 // 文字在canvas上的x坐标
+        var y = 20 + Math.random() * 8 // 文字在canvas上的y坐标
+        context.font = 'bold 23px 微软雅黑'
+        context.translate(x, y)
+        context.rotate(deg)
+        context.fillStyle = this.randomColor()
+        context.fillText(txt, 0, 0)
+        context.rotate(-deg)
+        context.translate(-x, -y)
       }
 
       // eslint-disable-next-line no-redeclare
       for (var i = 0; i <= 5; i++) {
         // 验证码上显示线条
-        context.strokeStyle = this.randomColor();
-        context.beginPath();
+        context.strokeStyle = this.randomColor()
+        context.beginPath()
         context.moveTo(
           // eslint-disable-next-line camelcase
           Math.random() * canvasWidth,
           // eslint-disable-next-line camelcase
           Math.random() * canvas_height
-        );
+        )
         context.lineTo(
           // eslint-disable-next-line camelcase
           Math.random() * canvasWidth,
           // eslint-disable-next-line camelcase
           Math.random() * canvas_height
-        );
-        context.stroke();
+        )
+        context.stroke()
       }
       // eslint-disable-next-line no-redeclare
       for (var i = 0; i <= 30; i++) {
         // 验证码上显示小点
-        context.strokeStyle = this.randomColor();
-        context.beginPath();
-        let x = Math.random() * canvasWidth;
-        context.moveTo(x, y);
-        context.lineTo(x + 1, y + 1);
-        context.stroke();
+        context.strokeStyle = this.randomColor()
+        context.beginPath()
+        let x = Math.random() * canvasWidth
+        context.moveTo(x, y)
+        context.lineTo(x + 1, y + 1)
+        context.stroke()
       }
     },
     randomColor() {
-      var r = Math.floor(Math.random() * 256);
-      var g = Math.floor(Math.random() * 256);
-      var b = Math.floor(Math.random() * 256);
-      return "rgb(" + r + "," + g + "," + b + ")";
+      var r = Math.floor(Math.random() * 256)
+      var g = Math.floor(Math.random() * 256)
+      var b = Math.floor(Math.random() * 256)
+      return 'rgb(' + r + ',' + g + ',' + b + ')'
     }
   },
   mounted() {
-    this.getRemembered();
+    this.getRemembered()
     // this.open('登录提示', '测试体验账号密码：admin | 123456')
-    this.draw(); // 生成并渲染出验证码图形
+    this.draw() // 生成并渲染出验证码图形
   },
   components: {
     YFooter,
     YButton
   }
-};
+}
 </script>
 <style lang="scss" rel="stylesheet/scss" scoped>
 * {
