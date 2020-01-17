@@ -50,39 +50,39 @@
                   <span style="float:left; width:300px;font-family:Times new roman,Times roman; "> {{dataObj.projectEnglishName}}</span>
                 </li>
                 <li style="width:50%; line-height:35px; float:left; color:#333;">
-                  <span style="float:left; width:55px; font-weight:600;">药物:</span>
+                  <span style="float:left; width:90px; font-weight:600;">药物:</span>
                   <span style="float:left; width:300px;"> {{dataObj.drugName}}</span>
                 </li>
                 <li style="width:50%; line-height:35px; float:left; color:#333;">
-                  <span style="float:left; width:80px; font-weight:600;">项目编码:</span>
+                  <span style="float:left; width:110px; font-weight:600;">项目编码:</span>
                   <span style="float:left; width:300px;font-family:Times new roman,Times roman;"> {{dataObj.code}}</span>
                 </li>
                 <li style="width:50%; line-height:35px; float:left; color:#333;">
-                  <span style="float:left; width:55px; font-weight:600;">基因:</span>
+                  <span style="float:left; width:90px; font-weight:600;">基因:</span>
                   <span style="float:left; width:300px;font-family:Times new roman,Times roman;"> {{dataObj.geneName}}</span>
                 </li>
                 <li style="width:50%; line-height:35px; float:left; color:#333;">
-                  <span style="float:left; width:80px; font-weight:600;">用药类型:</span>
+                  <span style="float:left; width:110px; font-weight:600;">用药类型:</span>
                   <span style="float:left; width:300px;"> {{dataObj.medicationType}}</span>
                 </li>
                 <li style="width:50%; line-height:35px; float:left; color:#333;">
-                  <span style="float:left; width:70px; font-weight:600;">单倍型:</span>
+                  <span style="float:left; width:90px; font-weight:600;">单倍型:</span>
                   <span style="float:left; width:300px;font-family:Times new roman,Times roman;"> {{dataObj.haploidType}}</span>
                 </li>
                 <li style="width:50%; line-height:35px; float:left; color:#333;">
-                  <span style="float:left; width:55px; font-weight:600;">种族:</span>
+                  <span style="float:left; width:110px; font-weight:600;">种族:</span>
                   <span style="float:left; width:300px;font-family:Times new roman,Times roman;"> {{dataObj.race}}</span>
                 </li>
                 <li style="width:50%; line-height:35px; float:left; color:#333;">
-                  <span style="float:left; width:55px; font-weight:600;">位点:</span>
+                  <span style="float:left; width:90px; font-weight:600;">位点:</span>
                   <span style="float:left; width:300px;font-family:Times new roman,Times roman;"> {{dataObj.genePorName}}</span>
                 </li>
                 <li style="width:50%; line-height:35px; float:left; color:#333;">
-                  <span style="float:left; width:80px; font-weight:600;">种族详情:</span>
+                  <span style="float:left; width:110px; font-weight:600;">种族详情:</span>
                   <span style="float:left; width:300px;font-family:Times new roman,Times roman;"> {{dataObj.raceDetails}}</span>
                 </li>
                 <li style="width:50%; line-height:35px; float:left; color:#333;">
-                  <span style="float:left; width:55px; font-weight:600;">表型:</span>
+                  <span style="float:left; width:90px; font-weight:600;">表型:</span>
                   <span style="float:left; width:300px;font-family:Times new roman,Times roman;"> {{dataObj.phenotypes}}</span>
                 </li>
               </ul>

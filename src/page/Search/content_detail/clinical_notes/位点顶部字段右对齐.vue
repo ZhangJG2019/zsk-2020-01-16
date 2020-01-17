@@ -6,7 +6,7 @@
           <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
           <el-breadcrumb-item>搜索结果</el-breadcrumb-item>
           <el-breadcrumb-item>临床注释</el-breadcrumb-item>
-          <el-breadcrumb-item>临床注释(基因)</el-breadcrumb-item>
+          <el-breadcrumb-item>临床注释(位点)</el-breadcrumb-item>
           <el-breadcrumb-item>内容详情</el-breadcrumb-item>
         </el-breadcrumb>
       </div>
@@ -22,7 +22,7 @@
             <li
               v-for="(item, index) in tabs"
               class="list-box"
-              :class="{'cur':item.projectId==tabsCur}"
+              :class="{'cur':item.genePorId==tabsCur&&item.taskId==taskId}"
               @click="tabsliClick(item,index)"
               :key="'tabs'+index"
               :title="item.projectName"
@@ -31,7 +31,7 @@
               <p
                 class="ellipsis"
                 style="font-size:15px;"
-              >{{item.projectName}}</p>
+              >{{item.projectName}}-{{item.genePorName}}</p>
             </li>
           </ul>
         </div>
@@ -46,162 +46,145 @@
             <div class="detail-box-top">
               <ul class="clearfix">
                 <li style="width:50%; line-height:35px; float:left; color:#333;">
-                  <span style="float:left; width:110px; font-weight:600;">项目英文名称:</span>
-                  <span style="float:left; width:300px;font-family:Times new roman,Times roman; "> {{dataObj.projectEnglishName}}</span>
+                  <span style="float:left; width:110px; font-weight:600">项目英文名称:</span>
+                  <span style="float:left; width:300px;font-family:Times new roman,Times roman;"> {{dataObj.projectEnglishName}}</span>
                 </li>
                 <li style="width:50%; line-height:35px; float:left; color:#333;">
-                  <span style="float:left; width:55px; font-weight:600;">药物:</span>
-                  <span style="float:left; width:300px;"> {{dataObj.drugName}}</span>
+                  <span style="float:left; width:95px; font-weight:600">证据等级:</span>
+                  <span style="float:left; width:300px;font-family:Times new roman,Times roman;">{{dataObj.evidenceLevel}}</span>
                 </li>
                 <li style="width:50%; line-height:35px; float:left; color:#333;">
-                  <span style="float:left; width:80px; font-weight:600;">项目编码:</span>
+                  <span style="float:left; width:110px; font-weight:600">项目编码:</span>
                   <span style="float:left; width:300px;font-family:Times new roman,Times roman;"> {{dataObj.code}}</span>
                 </li>
                 <li style="width:50%; line-height:35px; float:left; color:#333;">
-                  <span style="float:left; width:55px; font-weight:600;">基因:</span>
+                  <span style="float:left; width:95px; font-weight:600">药物:</span>
+                  <span style="float:left; width:300px;"> {{dataObj.drugName}}</span>
+                </li>
+                <li style="width:50%; line-height:35px; float:left; color:#333;">
+                  <span style="float:left; width:110px; font-weight:600">用药类型:</span>
+                  <span style="float:left; width:300px;font-family:Times new roman,Times roman;"> {{dataObj.medicationType}}</span>
+                </li>
+
+                <li style="width:50%; line-height:35px; float:left; color:#333;">
+                  <span style="float:left; width:95px; font-weight:600">基因:</span>
                   <span style="float:left; width:300px;font-family:Times new roman,Times roman;"> {{dataObj.geneName}}</span>
                 </li>
                 <li style="width:50%; line-height:35px; float:left; color:#333;">
-                  <span style="float:left; width:80px; font-weight:600;">用药类型:</span>
-                  <span style="float:left; width:300px;"> {{dataObj.medicationType}}</span>
-                </li>
-                <li style="width:50%; line-height:35px; float:left; color:#333;">
-                  <span style="float:left; width:70px; font-weight:600;">单倍型:</span>
-                  <span style="float:left; width:300px;font-family:Times new roman,Times roman;"> {{dataObj.haploidType}}</span>
-                </li>
-                <li style="width:50%; line-height:35px; float:left; color:#333;">
-                  <span style="float:left; width:55px; font-weight:600;">种族:</span>
+                  <span style="float:left; width:110px; font-weight:600">种族:</span>
                   <span style="float:left; width:300px;font-family:Times new roman,Times roman;"> {{dataObj.race}}</span>
                 </li>
                 <li style="width:50%; line-height:35px; float:left; color:#333;">
-                  <span style="float:left; width:55px; font-weight:600;">位点:</span>
-                  <span style="float:left; width:300px;font-family:Times new roman,Times roman;"> {{dataObj.genePorName}}</span>
+                  <span style="float:left; width:95px; font-weight:600">单倍型:</span>
+                  <span style="float:left; width:300px;font-family:Times new roman,Times roman;"> {{dataObj.haploidType}}</span>
+                </li>
+                <!-- <li style="width:50%; line-height:35px; float:left; color:#333;">
+                  <label style="display:inline-block; width:110px; font-weight:600">种族详情:</label>
+                  {{dataObj.raceDetails}}
+                </li> -->
+                <li style="width:50%; line-height:35px; float:left; color:#333;">
+                  <span style="float:left; width:110px; font-weight:600">种族详情:</span>
+                  <span style="float:left; width:300px;font-family:Times new roman,Times roman;">{{dataObj.raceDetails}}</span>
                 </li>
                 <li style="width:50%; line-height:35px; float:left; color:#333;">
-                  <span style="float:left; width:80px; font-weight:600;">种族详情:</span>
-                  <span style="float:left; width:300px;font-family:Times new roman,Times roman;"> {{dataObj.raceDetails}}</span>
+                  <span style="float:left; width:95px; font-weight:600">位点:</span>
+                  <span style="float:left; width:300px;font-family:Times new roman,Times roman;">{{dataObj.genePorName}}</span>
                 </li>
-                <li style="width:50%; line-height:35px; float:left; color:#333;">
-                  <span style="float:left; width:55px; font-weight:600;">表型:</span>
-                  <span style="float:left; width:300px;font-family:Times new roman,Times roman;"> {{dataObj.phenotypes}}</span>
+                <li style="width:50%; line-height:35px;  color:#333;">
+                  <span style="float:left; width:110px; font-weight:600">表型:</span>
+                  <span style="float:left; width:300px;font-family:Times new roman,Times roman;">{{dataObj.phenotypes}}</span>
+                </li>
+                <!-- <li style="width:50%; line-height:35px; float:left; color:#333;">
+                  <label style="display:inline-block; width:110px; font-weight:600">表型:</label>
+                  {{dataObj.phenotypes}}
+                </li> -->
+                <li style="width:50%; line-height:35px; float:right; color:#333;">
+                  <span style="float:left; width:95px; font-weight:600">位点RSID:</span>
+                  <span style="float:left; width:300px;font-family:Times new roman,Times roman;"> {{dataObj.rsId}}</span>
                 </li>
               </ul>
             </div>
             <div class="detail-box-content notes-box">
-              <ul class="section-box-word">
-                <li
-                  class="word-list"
-                  v-for="(item,index) of dataObj.useDrugSuggestList"
-                  :key="'useDrug'+index"
+              <div
+                class="table"
+                style="margin-top:20px;"
+              >
+                <el-table
+                  border
+                  style="width: 100%"
+                  :data="dataObj.chResultList"
                 >
-                  <i class="word-icon"></i>
-                  <p>{{dataObj.projectName}}</p>
-                  <p style="color:#c7285e; margin-top:5px;">{{item.conclusion}}</p>
-                  <p style=" margin-top:10px;">该基因位点-位点结果情况说明:</p>
-                  <dl class="clearfix qkuang-list">
-                    <dd
-                      v-for="(list,index) of item.resultList"
-                      :key="'result'+index"
-                    >{{list}}</dd>
-                  </dl>
-                </li>
-              </ul>
+                  <!-- <el-table-column prop="result" width="180" label="位点值" align="center"></el-table-column> -->
+                  <el-table-column
+                    prop="result"
+                    width="180"
+                    label="基因型"
+                    align="center"
+                  ></el-table-column>
+                  <!-- <el-table-column prop="genotype" align="left" label="临床建议"></el-table-column> -->
+                  <el-table-column
+                    prop="genotype"
+                    align="center"
+                    label="临床注释（位点）"
+                  ></el-table-column>
+                </el-table>
+              </div>
+              <!-- <div class="table" style="margin-top:20px;">
+                <el-table border style="width: 100%" :data="dataObj.enResultList">
+                  <el-table-column prop="result" width="180" label="Gence" align="center"></el-table-column>
+                  <el-table-column prop="genotype" label="Clinical recommendations" align="left"></el-table-column>
+                </el-table>
+              </div>-->
               <h4 class="section-box">证据</h4>
               <div class="table">
-                <el-tabs
-                  v-model="activeName2"
-                  type="card"
+                <el-table
+                  border
+                  style="width: 100%"
+                  :data="dataObj.literatureSciInfoList"
                 >
-                  <el-tab-pane
-                    label="国内文献"
-                    name="first"
+                  <el-table-column
+                    type="index"
+                    width="50"
+                    label="序号"
+                    align="center"
+                  ></el-table-column>
+                  <el-table-column
+                    width="110"
+                    label="PMID"
+                    align="center"
                   >
-                    <el-table
-                      border
-                      style="width: 100%"
-                      :data="dataObj.literatureCoreInfoList"
-                    >
-                      <el-table-column
-                        type="index"
-                        width="50"
-                        label="序号"
-                        align="center"
-                      ></el-table-column>
-                      <el-table-column
-                        label="题目"
-                        align="center"
-                      >
-                        <template slot-scope="scope">
-                          <p
-                            style="color:#398dbc;cursor: pointer;"
-                            @click="toDetailPage(scope.row)"
-                          >{{scope.row.title||"--"}}</p>
-                        </template>
-                      </el-table-column>
-                      <el-table-column
-                        prop="source"
-                        width="180"
-                        align="center"
-                        label="期刊"
-                      ></el-table-column>
-                      <el-table-column
-                        prop="year"
-                        width="80"
-                        align="center"
-                        label="年份"
-                      ></el-table-column>
-                    </el-table>
-                  </el-tab-pane>
-                  <el-tab-pane
-                    label="国外文献"
-                    name="second"
+                    <template slot-scope="scope">
+                      <p style="font-family:Times new roman,Times roman;">（{{scope.row.pmid}}）</p>
+                    </template>
+                  </el-table-column>
+                  <el-table-column
+                    prop="name"
+                    label="题目"
+                    align="center"
                   >
-                    <el-table
-                      border
-                      style="width: 100%"
-                      :data="dataObj.literatureSciInfoList"
-                    >
-                      <el-table-column
-                        type="index"
-                        width="50"
-                        label="序号"
-                        align="center"
-                      ></el-table-column>
-                      <el-table-column
-                        prop="pmid"
-                        width="100"
-                        label="PMID"
-                        align="center"
-                      ></el-table-column>
-                      <el-table-column
-                        label="题目"
-                        align="center"
-                      >
-                        <template slot-scope="scope">
-                          <p
-                            style="border-bottom:none;color:#368ebe;text-align:left;cursor: pointer;font-family:Times new roman,Times roman;"
-                            @click="toDetailPage(scope.row)"
-                          >{{scope.row.name||"--"}}</p>
-                        </template>
-                      </el-table-column>
-                      <el-table-column
-                        width="210"
-                        align="center"
-                        label="期刊"
-                      >
-                        <template slot-scope="scope">
-                          <p style="font-family:Times new roman,Times roman;">（{{scope.row.journal}}）</p>
-                        </template>
-                      </el-table-column>
-                      <el-table-column
-                        prop="year"
-                        width="80"
-                        align="center"
-                        label="年份"
-                      ></el-table-column>
-                    </el-table>
-                  </el-tab-pane>
-                </el-tabs>
+                    <template slot-scope="scope">
+                      <p
+                        style="color:#398dbc;cursor: pointer;border-bottom:none;font-family:Times new roman,Times roman;"
+                        @click="toDetailPage(scope.row)"
+                      >{{scope.row.name||"--"}}</p>
+                    </template>
+                  </el-table-column>
+                  <el-table-column
+                    width="130"
+                    align="center"
+                    label="期刊"
+                  >
+                    <template slot-scope="scope">
+                      <p style="font-family:Times new roman,Times roman;">（{{scope.row.journal}}）</p>
+                    </template>
+                  </el-table-column>
+                  <el-table-column
+                    prop="year"
+                    width="130"
+                    align="center"
+                    label="年份"
+                  ></el-table-column>
+                </el-table>
               </div>
             </div>
           </div>
@@ -212,43 +195,57 @@
 </template>
 <script>
 import Vue from 'vue'
-import { getCombinedClinicalDetails } from '@/api/labels_api.js'
+import { getGeneClinicalDetails } from '@/api/labels_api.js'
 import { setStore, getStore } from '@/utils/storage.js'
 export default {
-  name: 'clinicalNotesGeneDetail',
+  name: 'clinicalNotesWeidDetail',
   // 生命周期函数
   data() {
     return {
-      tabsCur: '12',
+      tabsCur: '',
+      taskId: '',
       tabs: [],
-      activeName2: 'first',
       dataObj: {},
-      queryObj: {}
+      queryObj: {},
+      curDefault: {}
     }
   },
   created() {
     this.queryObj =
       Object.keys(this.$route.query).length > 0 ? this.$route.query : {}
-    this.tabsCur = this.queryObj.projectId
+    this.tabsCur = this.queryObj.genePorId
+    this.taskId = this.queryObj.taskId
     this.tabs = JSON.parse(getStore('clinical_notes')) || []
-    let a = this.tabs.lenght
   },
   mounted() {
+    this.curDefault = this.tabs.filter(
+      res =>
+        res.genePorId == this.queryObj.genePorId &&
+        res.taskId == this.queryObj.taskId
+    )[0]
+    // console.log(this.curDefault);
+
     this.queryData()
   },
   methods: {
     tabsliClick(obj, index) {
-      this.tabsCur = obj.projectId
+      this.tabsCur = obj.genePorId
+      this.taskId = obj.taskId
+
+      this.curDefault = this.tabs.filter(
+        // res => res.genePorId == obj.genePorId
+        res => res.genePorId == this.tabsCur && res.taskId == this.taskId
+      )[0]
       this.$nextTick(function() {
         this.queryData()
       })
     },
     queryData() {
-      //
       let param = {
-        id: this.tabsCur
+        genePorId: this.tabsCur,
+        taskId: this.taskId
       }
-      getCombinedClinicalDetails(param).then(res => {
+      getGeneClinicalDetails(param).then(res => {
         this.dataObj = res
         // console.log(this.dataObj);
       })
@@ -259,21 +256,16 @@ export default {
         path: '/c-n-detail',
         query: {
           literId: id,
-          type: this.activeName2 == 'first' ? '1' : '2'
+          type: '2'
         }
       })
-
       this.setPageData()
       window.open(routeData.href, '_blank')
     },
     setPageData() {
+      //
       let pageData = []
-      if (this.activeName2 == 'first') {
-        this.pageData = this.dataObj.literatureCoreInfoList
-      } else {
-        this.pageData = this.dataObj.literatureSciInfoList
-      }
-      pageData = this.pageData
+      pageData = this.dataObj.literatureSciInfoList
       setStore('clinical_nodes_detail', pageData)
     }
   }
@@ -405,14 +397,12 @@ export default {
             }
             .qkuang-list {
               margin-top: 8px;
-              // border: 1px solid #eee;
-              border: 1px solid #aaaaaa;
+              border: 1px solid #eee;
               padding: 8px;
               dd {
                 float: left;
                 padding: 0 10px;
-                // border-right: 1px solid #ededed;
-                border-right: 1.5px solid #000;
+                border-right: 1px solid #ededed;
                 margin: 10px 0;
                 color: #666;
                 font-size: 14px;
@@ -474,3 +464,4 @@ export default {
   }
 }
 </style>
+  

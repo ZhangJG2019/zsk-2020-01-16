@@ -65,7 +65,7 @@
                 >
                   <h4 class="section-box">总结</h4>
                   <div class="table">
-                    <table style="border:1px solid #ccc;width:100%;height:100%;border-spacing: 0;border-bottom:none;">
+                    <table style="border:1px solid #ccc;width:100%;height:100%;border-spacing: 0;border-bottom:none;border-right:0;">
                       <tr>
                         <td
                           class="td_left hui"
@@ -96,12 +96,12 @@
                         ></td>
                         <td
                           class="td_left"
-                          style="text-align:center;"
+                          style="text-align:center;font-family:Times new roman,Times roman;"
                           v-text="item.gene"
                         ></td>
                         <td
                           class="td_left"
-                          style="text-align:center;"
+                          style="text-align:center;font-family:Times new roman,Times roman;"
                           v-text="item.pValue"
                         ></td>
                         <td
@@ -151,7 +151,7 @@
                         ></td>
                         <td
                           class="td_left"
-                          style="text-align:center;"
+                          style="text-align:center;font-family:Times new roman,Times roman;"
                           v-text="item.ofCase"
                         ></td>
 
@@ -201,7 +201,7 @@
                   <p class="text-box">{{item.sentence}}</p>
                   <div class="table">
 
-                    <table style="border:1px solid #ccc;width:100%;height:100%;border-spacing: 0;border-bottom:none;">
+                    <table style="border:1px solid #ccc;width:100%;height:100%;border-spacing: 0;border-bottom:none;border-right:0;">
                       <tr>
                         <td
                           class="td_left hui"
@@ -233,7 +233,7 @@
                         ></td>
                         <td
                           class="td_left"
-                          style="text-align:center;"
+                          style="text-align:center;font-family:Times new roman,Times roman;"
                           v-text="item.gene"
                         ></td>
                         <td
